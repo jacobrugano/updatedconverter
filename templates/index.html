@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="blog/static/script.js"></script>
 
+
     <title>Currency Converter </title>
     <style>
         
@@ -46,19 +47,38 @@
           <div class="collapse navbar" >
       
             <div class="d-flex align-items-right" id="auth">
-              <button type="button" class="btn btn-link px-3 me-2">
+              <button type="button"  class="btn btn-secondary me-3"  href="/login">
                 Login
               </button>
-              <button type="button" class="btn btn-secondary me-3">
+              <br />
+              <button type="button" class="btn btn-secondary me-3" href="/sign-up">
                 Register
               </button>
-              
             </div>
           </div>
           <!-- Collapsible wrapper -->
         </div>
         <!-- Container wrapper -->
       </nav>
+      {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+        {% for category, message in messages %}
+        {% if category == "error" %}
+        <div class="alert alert-danger alter-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alter-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endif %}
+
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div class="container">{% block content %}{% endblock %}</div>
 
       
        
